@@ -20,6 +20,10 @@
     --red-pale: #f5e8e7;
     --gold: #c9a84c;
     --gold-pale: #f5eed8;
+    --plum: #6b4f72;
+    --plum-pale: #ede4f0;
+    --mid: #6b6560;
+    --border: rgba(0,0,0,0.08);
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -32,7 +36,61 @@
     line-height: 1.6;
   }
 
-  /* COVER */
+  /* ── NAV FLOTANTE ── */
+  .site-nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 200;
+    background: rgba(44,44,44,0.96);
+    backdrop-filter: blur(10px);
+    padding: 0.85rem 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .nav-brand {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 1rem;
+    color: rgba(255,255,255,0.75);
+    text-decoration: none;
+  }
+  .nav-links {
+    display: flex;
+    gap: 0.4rem;
+    list-style: none;
+  }
+  .nav-links a {
+    font-size: 0.78rem;
+    font-weight: 400;
+    color: rgba(255,255,255,0.5);
+    text-decoration: none;
+    padding: 0.35rem 0.75rem;
+    border-radius: 100px;
+    border: 1px solid transparent;
+    transition: all 0.18s;
+    white-space: nowrap;
+  }
+  .nav-links a:hover {
+    color: #fff;
+    border-color: rgba(255,255,255,0.15);
+  }
+  .nav-links a.nav-highlight {
+    color: var(--sage-light);
+    border-color: rgba(168,197,173,0.3);
+  }
+  .nav-links a.nav-highlight:hover {
+    background: rgba(168,197,173,0.1);
+    color: #fff;
+  }
+  @media (max-width: 640px) {
+    .site-nav { padding: 0.75rem 1.2rem; }
+    .nav-links a { font-size: 0.72rem; padding: 0.3rem 0.55rem; }
+  }
+
+  /* ── COVER ── */
   .cover {
     min-height: 100vh;
     background: var(--charcoal);
@@ -40,617 +98,440 @@
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    padding: 5rem 5rem 4rem;
+    padding: 8rem 5rem 4rem;
     position: relative;
     overflow: hidden;
   }
-
   .cover::before {
     content: '';
-    position: absolute;
-    top: -10%;
-    right: -5%;
-    width: 55%;
-    height: 120%;
+    position: absolute; top: -10%; right: -5%;
+    width: 55%; height: 120%;
     background: radial-gradient(ellipse at center, rgba(107,143,113,0.18) 0%, transparent 70%);
     pointer-events: none;
   }
-
   .cover::after {
     content: '';
-    position: absolute;
-    bottom: -5%;
-    left: -5%;
-    width: 40%;
-    height: 60%;
+    position: absolute; bottom: -5%; left: -5%;
+    width: 40%; height: 60%;
     background: radial-gradient(ellipse at center, rgba(194,112,80,0.12) 0%, transparent 70%);
     pointer-events: none;
   }
-
   .cover-tag {
-    font-family: 'DM Sans', sans-serif;
-    font-weight: 400;
-    font-size: 0.7rem;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: var(--sage-light);
-    margin-bottom: 2rem;
+    font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--sage-light); margin-bottom: 2rem; font-weight: 400;
   }
-
   .cover h1 {
-    font-family: 'Fraunces', serif;
-    font-weight: 300;
+    font-family: 'Fraunces', serif; font-weight: 300;
     font-size: clamp(3rem, 7vw, 5.5rem);
-    color: #fff;
-    line-height: 1.05;
-    margin-bottom: 0.5rem;
-    position: relative;
-    z-index: 1;
+    color: #fff; line-height: 1.05; margin-bottom: 0.5rem; position: relative; z-index: 1;
   }
-
-  .cover h1 em {
-    font-style: italic;
-    color: var(--sage-light);
-  }
-
+  .cover h1 em { font-style: italic; color: var(--sage-light); }
   .cover-subtitle {
-    font-family: 'Fraunces', serif;
-    font-style: italic;
-    font-weight: 300;
+    font-family: 'Fraunces', serif; font-style: italic; font-weight: 300;
     font-size: clamp(1rem, 2.5vw, 1.4rem);
-    color: var(--terracotta-light);
-    margin-top: 1.2rem;
-    margin-bottom: 3rem;
-    max-width: 520px;
-    position: relative;
-    z-index: 1;
+    color: var(--terracotta-light); margin-top: 1.2rem; margin-bottom: 3rem;
+    max-width: 520px; position: relative; z-index: 1;
   }
-
   .cover-for {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.75rem;
-    background: rgba(255,255,255,0.06);
-    border: 1px solid rgba(255,255,255,0.12);
-    border-radius: 100px;
-    padding: 0.6rem 1.2rem;
-    font-size: 0.82rem;
-    color: rgba(255,255,255,0.7);
-    position: relative;
-    z-index: 1;
+    display: inline-flex; align-items: center; gap: 0.75rem;
+    background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 100px; padding: 0.6rem 1.2rem;
+    font-size: 0.82rem; color: rgba(255,255,255,0.7); position: relative; z-index: 1;
   }
-
   .cover-for span {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--sage-light);
-    display: inline-block;
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--sage-light); display: inline-block;
   }
-
   .cover-scroll {
-    position: absolute;
-    bottom: 2.5rem;
-    left: 5rem;
-    font-size: 0.72rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.3);
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
+    position: absolute; bottom: 2.5rem; left: 5rem;
+    font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: rgba(255,255,255,0.3); display: flex; align-items: center; gap: 0.6rem;
   }
-
   .cover-scroll::before {
-    content: '';
-    display: block;
-    width: 28px;
-    height: 1px;
-    background: rgba(255,255,255,0.3);
+    content: ''; display: block; width: 28px; height: 1px; background: rgba(255,255,255,0.3);
   }
 
-  /* INTRO */
-  .intro {
-    padding: 5rem 5rem 4rem;
-    max-width: 900px;
-  }
-
-  .intro p {
-    font-size: 1.05rem;
-    color: var(--warm-gray);
-    margin-bottom: 1rem;
-    max-width: 640px;
-  }
-
-  .intro p strong {
-    color: var(--charcoal);
-    font-weight: 500;
-  }
-
+  /* ── INTRO ── */
+  .intro { padding: 5rem 5rem 4rem; max-width: 900px; }
+  .intro p { font-size: 1.05rem; color: var(--warm-gray); margin-bottom: 1rem; max-width: 640px; }
+  .intro p strong { color: var(--charcoal); font-weight: 500; }
   .intro-reminder {
-    margin-top: 2.5rem;
-    padding: 1.5rem 2rem;
-    background: var(--sage-pale);
-    border-left: 3px solid var(--sage);
-    border-radius: 0 8px 8px 0;
-    max-width: 640px;
+    margin-top: 2.5rem; padding: 1.5rem 2rem;
+    background: var(--sage-pale); border-left: 3px solid var(--sage);
+    border-radius: 0 8px 8px 0; max-width: 640px;
   }
-
   .intro-reminder p {
-    font-family: 'Fraunces', serif;
-    font-style: italic;
-    font-size: 1.1rem;
-    color: var(--sage);
-    margin: 0;
+    font-family: 'Fraunces', serif; font-style: italic;
+    font-size: 1.1rem; color: var(--sage); margin: 0;
   }
 
-  /* SECTIONS */
-  .section {
-    padding: 4rem 5rem;
-    border-top: 1px solid rgba(0,0,0,0.06);
-  }
-
-  .section-header {
-    display: flex;
-    align-items: flex-start;
-    gap: 1.5rem;
-    margin-bottom: 3rem;
-  }
-
+  /* ── SECTIONS ── */
+  .section { padding: 4rem 5rem; border-top: 1px solid rgba(0,0,0,0.06); }
+  .section-header { display: flex; align-items: flex-start; gap: 1.5rem; margin-bottom: 3rem; }
   .section-num {
-    font-family: 'Fraunces', serif;
-    font-weight: 300;
-    font-size: 4rem;
-    line-height: 1;
-    color: rgba(0,0,0,0.08);
-    flex-shrink: 0;
-    margin-top: -0.5rem;
+    font-family: 'Fraunces', serif; font-weight: 300; font-size: 4rem;
+    line-height: 1; color: rgba(0,0,0,0.08); flex-shrink: 0; margin-top: -0.5rem;
   }
-
-  .section-title-block {}
-
   .section-tag {
-    font-size: 0.68rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    font-weight: 500;
-    margin-bottom: 0.4rem;
+    font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase;
+    font-weight: 500; margin-bottom: 0.4rem;
   }
-
   .section-title {
-    font-family: 'Fraunces', serif;
-    font-weight: 400;
-    font-size: clamp(1.5rem, 3vw, 2rem);
-    line-height: 1.1;
+    font-family: 'Fraunces', serif; font-weight: 400;
+    font-size: clamp(1.5rem, 3vw, 2rem); line-height: 1.1;
   }
 
-  /* SECTION 1 – SEÑALES */
+  /* SECTION 1 */
   .section--signals .section-tag { color: var(--terracotta); }
-  .section--signals .section-title { color: var(--charcoal); }
-
-  .signals-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-    gap: 1.2rem;
-    max-width: 800px;
-  }
-
+  .signals-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1.2rem; max-width: 800px; }
   .signal-card {
-    background: #fff;
-    border-radius: 12px;
-    padding: 1.5rem;
-    border: 1px solid rgba(0,0,0,0.06);
-    position: relative;
-    overflow: hidden;
+    background: #fff; border-radius: 12px; padding: 1.5rem;
+    border: 1px solid rgba(0,0,0,0.06); position: relative; overflow: hidden;
   }
-
   .signal-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 3px;
-    background: var(--terracotta-light);
+    content: ''; position: absolute; top: 0; left: 0;
+    width: 100%; height: 3px; background: var(--terracotta-light);
   }
-
-  .signal-icon {
-    font-size: 1.6rem;
-    margin-bottom: 0.75rem;
-    display: block;
-  }
-
+  .signal-icon { font-size: 1.6rem; margin-bottom: 0.75rem; display: block; }
   .signal-label {
-    font-weight: 500;
-    font-size: 0.88rem;
-    color: var(--terracotta);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    margin-bottom: 0.4rem;
+    font-weight: 500; font-size: 0.88rem; color: var(--terracotta);
+    text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.4rem;
   }
-
-  .signal-desc {
-    font-size: 0.9rem;
-    color: var(--warm-gray);
-    line-height: 1.5;
-  }
-
+  .signal-desc { font-size: 0.9rem; color: var(--warm-gray); line-height: 1.5; }
   .signal-alert {
-    margin-top: 2rem;
-    max-width: 620px;
-    background: var(--terracotta-light);
-    border-radius: 10px;
-    padding: 1.2rem 1.5rem;
-    display: flex;
-    gap: 0.75rem;
-    align-items: flex-start;
+    margin-top: 2rem; max-width: 620px; background: var(--terracotta-light);
+    border-radius: 10px; padding: 1.2rem 1.5rem; display: flex; gap: 0.75rem; align-items: flex-start;
   }
-
   .signal-alert-icon { font-size: 1.2rem; flex-shrink: 0; margin-top: 0.05rem; }
+  .signal-alert p { font-size: 0.9rem; color: #5c3020; line-height: 1.5; }
 
-  .signal-alert p {
-    font-size: 0.9rem;
-    color: #5c3020;
-    line-height: 1.5;
-  }
-
-  /* SECTION 2 – FRASES */
+  /* SECTION 2 */
   .section--phrases .section-tag { color: var(--sage); }
-
-  .phrase-stack {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    max-width: 680px;
-  }
-
+  .phrase-stack { display: flex; flex-direction: column; gap: 1.5rem; max-width: 680px; }
   .phrase-card {
-    background: #fff;
-    border-radius: 14px;
-    padding: 1.8rem 2rem;
+    background: #fff; border-radius: 14px; padding: 1.8rem 2rem;
     border: 1px solid rgba(0,0,0,0.06);
-    display: grid;
-    grid-template-columns: auto 1fr;
-    gap: 1.2rem;
-    align-items: start;
+    display: grid; grid-template-columns: auto 1fr; gap: 1.2rem; align-items: start;
   }
-
   .phrase-number {
-    width: 36px;
-    height: 36px;
-    background: var(--sage-pale);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Fraunces', serif;
-    font-size: 1rem;
-    color: var(--sage);
-    flex-shrink: 0;
-    margin-top: 0.2rem;
+    width: 36px; height: 36px; background: var(--sage-pale); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Fraunces', serif; font-size: 1rem; color: var(--sage);
+    flex-shrink: 0; margin-top: 0.2rem;
   }
-
-  .phrase-content {}
-
   .phrase-text {
-    font-family: 'Fraunces', serif;
-    font-style: italic;
-    font-size: 1.15rem;
-    color: var(--charcoal);
-    margin-bottom: 0.6rem;
-    line-height: 1.4;
+    font-family: 'Fraunces', serif; font-style: italic; font-size: 1.15rem;
+    color: var(--charcoal); margin-bottom: 0.6rem; line-height: 1.4;
   }
-
-  .phrase-why {
-    font-size: 0.85rem;
-    color: var(--warm-gray);
-    line-height: 1.5;
-  }
-
-  .phrase-why strong {
-    color: var(--sage);
-    font-weight: 500;
-  }
-
+  .phrase-why { font-size: 0.85rem; color: var(--warm-gray); line-height: 1.5; }
+  .phrase-why strong { color: var(--sage); font-weight: 500; }
   .phrase-tip {
-    margin-top: 2rem;
-    max-width: 640px;
-    padding: 1.2rem 1.5rem;
-    background: var(--sage-pale);
-    border-radius: 10px;
-    font-size: 0.88rem;
-    color: #3a5c3e;
-    line-height: 1.6;
+    margin-top: 2rem; max-width: 640px; padding: 1.2rem 1.5rem;
+    background: var(--sage-pale); border-radius: 10px;
+    font-size: 0.88rem; color: #3a5c3e; line-height: 1.6;
   }
-
   .phrase-tip strong { font-weight: 500; }
 
-  /* SECTION 3 – DISTRACCIÓN */
+  /* SECTION 3 */
   .section--distraction .section-tag { color: var(--gold); }
-
   .distraction-flow {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-    max-width: 660px;
-    position: relative;
+    display: flex; flex-direction: column; gap: 0; max-width: 660px; position: relative;
   }
-
   .distraction-flow::before {
-    content: '';
-    position: absolute;
-    left: 20px;
-    top: 40px;
-    bottom: 40px;
-    width: 1px;
-    background: var(--gold-pale);
+    content: ''; position: absolute; left: 20px; top: 40px; bottom: 40px;
+    width: 1px; background: var(--gold-pale);
   }
-
-  .dist-step {
-    display: flex;
-    gap: 1.5rem;
-    align-items: flex-start;
-    padding: 1rem 0;
-    position: relative;
-  }
-
+  .dist-step { display: flex; gap: 1.5rem; align-items: flex-start; padding: 1rem 0; position: relative; }
   .dist-dot {
-    width: 40px;
-    height: 40px;
-    background: var(--gold-pale);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1rem;
-    flex-shrink: 0;
-    border: 2px solid var(--gold);
-    background: #fff;
-    z-index: 1;
+    width: 40px; height: 40px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem; flex-shrink: 0; border: 2px solid var(--gold); background: #fff; z-index: 1;
   }
-
-  .dist-body {}
-
   .dist-step-label {
-    font-size: 0.7rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--gold);
-    font-weight: 500;
-    margin-bottom: 0.3rem;
+    font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--gold); font-weight: 500; margin-bottom: 0.3rem;
   }
-
-  .dist-step-text {
-    font-size: 0.95rem;
-    color: var(--charcoal);
-    line-height: 1.5;
-  }
-
-  .dist-step-text em {
-    font-style: italic;
-    color: var(--warm-gray);
-  }
-
-  .distraction-examples {
-    margin-top: 2.5rem;
-    max-width: 660px;
-  }
-
+  .dist-step-text { font-size: 0.95rem; color: var(--charcoal); line-height: 1.5; }
+  .dist-step-text em { font-style: italic; color: var(--warm-gray); }
+  .distraction-examples { margin-top: 2.5rem; max-width: 660px; }
   .distraction-examples h4 {
-    font-size: 0.75rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--warm-gray);
-    margin-bottom: 1rem;
-    font-weight: 500;
+    font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--warm-gray); margin-bottom: 1rem; font-weight: 500;
   }
-
-  .examples-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.6rem;
-  }
-
+  .examples-grid { display: flex; flex-wrap: wrap; gap: 0.6rem; }
   .example-pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    padding: 0.45rem 0.9rem;
-    background: #fff;
-    border: 1px solid rgba(0,0,0,0.08);
-    border-radius: 100px;
-    font-size: 0.85rem;
-    color: var(--charcoal);
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    padding: 0.45rem 0.9rem; background: #fff; border: 1px solid rgba(0,0,0,0.08);
+    border-radius: 100px; font-size: 0.85rem; color: var(--charcoal);
   }
 
-  /* SECTION 4 – NO HACER */
-  .section--dont {
-    background: #1e1e1e;
-  }
-
+  /* SECTION 4 */
+  .section--dont { background: #1e1e1e; }
   .section--dont .section-num { color: rgba(255,255,255,0.06); }
   .section--dont .section-tag { color: var(--red-soft); }
   .section--dont .section-title { color: #fff; }
-
-  .dont-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 1.2rem;
-    max-width: 860px;
-  }
-
+  .dont-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.2rem; max-width: 860px; }
   .dont-card {
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 14px;
-    padding: 1.6rem;
-    position: relative;
-    overflow: hidden;
+    background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 14px; padding: 1.6rem; position: relative; overflow: hidden;
   }
-
   .dont-card::after {
-    content: '✕';
-    position: absolute;
-    top: 1.2rem;
-    right: 1.4rem;
-    font-size: 0.85rem;
-    color: var(--red-soft);
-    opacity: 0.6;
+    content: '✕'; position: absolute; top: 1.2rem; right: 1.4rem;
+    font-size: 0.85rem; color: var(--red-soft); opacity: 0.6;
   }
-
-  .dont-icon {
-    font-size: 1.8rem;
-    margin-bottom: 0.8rem;
-    display: block;
-  }
-
-  .dont-title {
-    font-weight: 500;
-    font-size: 1rem;
-    color: #fff;
-    margin-bottom: 0.5rem;
-  }
-
-  .dont-desc {
-    font-size: 0.87rem;
-    color: rgba(255,255,255,0.5);
-    line-height: 1.5;
-  }
-
+  .dont-icon { font-size: 1.8rem; margin-bottom: 0.8rem; display: block; }
+  .dont-title { font-weight: 500; font-size: 1rem; color: #fff; margin-bottom: 0.5rem; }
+  .dont-desc { font-size: 0.87rem; color: rgba(255,255,255,0.5); line-height: 1.5; }
   .dont-instead {
-    margin-top: 0.8rem;
-    padding-top: 0.8rem;
+    margin-top: 0.8rem; padding-top: 0.8rem;
     border-top: 1px solid rgba(255,255,255,0.08);
-    font-size: 0.83rem;
-    color: var(--sage-light);
-    line-height: 1.4;
+    font-size: 0.83rem; color: var(--sage-light); line-height: 1.4;
   }
+  .dont-instead::before { content: '→ '; opacity: 0.7; }
 
-  .dont-instead::before {
-    content: '→ ';
-    opacity: 0.7;
-  }
-
-  /* EMERGENCY CARD */
-  .emergency {
-    padding: 4rem 5rem;
-    border-top: 1px solid rgba(0,0,0,0.06);
-  }
-
+  /* EMERGENCY */
+  .emergency { padding: 4rem 5rem; border-top: 1px solid rgba(0,0,0,0.06); }
   .emergency-card {
-    background: var(--charcoal);
-    border-radius: 20px;
-    padding: 3rem;
-    max-width: 700px;
-    position: relative;
-    overflow: hidden;
+    background: var(--charcoal); border-radius: 20px; padding: 3rem;
+    max-width: 700px; position: relative; overflow: hidden;
   }
-
   .emergency-card::before {
-    content: '';
-    position: absolute;
-    top: 0; right: 0;
+    content: ''; position: absolute; top: 0; right: 0;
     width: 300px; height: 300px;
     background: radial-gradient(circle, rgba(107,143,113,0.15) 0%, transparent 70%);
   }
-
   .emergency-label {
-    font-size: 0.68rem;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: var(--sage-light);
-    margin-bottom: 1rem;
+    font-size: 0.68rem; letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--sage-light); margin-bottom: 1rem;
   }
-
   .emergency-title {
-    font-family: 'Fraunces', serif;
-    font-weight: 300;
-    font-size: 1.8rem;
-    color: #fff;
-    margin-bottom: 1.5rem;
-    line-height: 1.2;
+    font-family: 'Fraunces', serif; font-weight: 300; font-size: 1.8rem;
+    color: #fff; margin-bottom: 1.5rem; line-height: 1.2;
   }
-
   .emergency-steps {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 0.8rem;
-    margin-bottom: 2rem;
+    list-style: none; display: flex; flex-direction: column;
+    gap: 0.8rem; margin-bottom: 2rem; counter-reset: step;
   }
-
   .emergency-steps li {
-    display: flex;
-    gap: 0.75rem;
-    align-items: baseline;
-    font-size: 0.95rem;
-    color: rgba(255,255,255,0.8);
+    display: flex; gap: 0.75rem; align-items: baseline;
+    font-size: 0.95rem; color: rgba(255,255,255,0.8);
   }
-
   .emergency-steps li::before {
-    content: counter(step);
-    counter-increment: step;
-    width: 22px;
-    height: 22px;
-    background: rgba(107,143,113,0.25);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.72rem;
-    color: var(--sage-light);
-    flex-shrink: 0;
-    font-weight: 500;
+    content: counter(step); counter-increment: step;
+    width: 22px; height: 22px; background: rgba(107,143,113,0.25);
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-size: 0.72rem; color: var(--sage-light); flex-shrink: 0; font-weight: 500;
   }
-
-  .emergency-steps { counter-reset: step; }
-
   .emergency-note {
-    font-family: 'Fraunces', serif;
-    font-style: italic;
-    font-size: 0.95rem;
-    color: rgba(255,255,255,0.4);
+    font-family: 'Fraunces', serif; font-style: italic;
+    font-size: 0.95rem; color: rgba(255,255,255,0.4);
   }
 
-  /* FOOTER */
+  /* ══════════════════════════════════════════
+     BIBLIOTECA DE RECURSOS
+  ══════════════════════════════════════════ */
+  #biblioteca {
+    scroll-margin-top: 60px;
+  }
+
+  .bib-header {
+    background: var(--charcoal);
+    padding: 5rem 5rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .bib-header::before {
+    content:''; position:absolute; top:-20%; right:-5%;
+    width:50%; height:140%;
+    background:radial-gradient(ellipse,rgba(107,143,113,.2) 0%,transparent 65%);
+    pointer-events:none;
+  }
+  .bib-header::after {
+    content:''; position:absolute; bottom:-10%; left:10%;
+    width:35%; height:70%;
+    background:radial-gradient(ellipse,rgba(194,112,80,.12) 0%,transparent 65%);
+    pointer-events:none;
+  }
+  .bib-header-inner { position:relative; z-index:1; max-width:1100px; }
+  .bib-header-tag {
+    font-size:.68rem; letter-spacing:.22em; text-transform:uppercase;
+    color:var(--sage-light); font-weight:500; margin-bottom:1.2rem;
+  }
+  .bib-header h2 {
+    font-family:'Fraunces',serif; font-weight:300;
+    font-size:clamp(2rem,5vw,3.4rem);
+    color:#fff; line-height:1.05; margin-bottom:.6rem;
+  }
+  .bib-header h2 em { font-style:italic; color:var(--terracotta-light); }
+  .bib-header-sub {
+    font-size:.95rem; color:rgba(255,255,255,.55);
+    max-width:520px; margin-top:.8rem; line-height:1.6;
+  }
+  .bib-count {
+    margin-top:1.8rem;
+    display:inline-flex; align-items:center; gap:.6rem;
+    background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.12);
+    border-radius:100px; padding:.45rem 1rem;
+    font-size:.78rem; color:rgba(255,255,255,.6);
+  }
+  .bib-dot { width:6px; height:6px; border-radius:50%; background:var(--sage-light); display:inline-block; }
+
+  .bib-controls {
+    background:#fff;
+    border-bottom:1px solid var(--border);
+    padding:1.2rem 5rem;
+    position:sticky; top:52px; z-index:100;
+    box-shadow:0 2px 20px rgba(0,0,0,.04);
+  }
+  .bib-controls-inner { max-width:1100px; margin:0 auto; display:flex; flex-direction:column; gap:1rem; }
+  .bib-search-wrap { position:relative; }
+  .bib-search-icon {
+    position:absolute; left:14px; top:50%; transform:translateY(-50%);
+    font-size:1rem; opacity:.4;
+  }
+  #bib-search {
+    width:100%; padding:.7rem 1rem .7rem 2.8rem;
+    border:1px solid var(--border); border-radius:10px;
+    font-family:'DM Sans',sans-serif; font-size:.9rem; font-weight:300;
+    background:var(--cream); color:var(--charcoal);
+    outline:none; transition:border-color .2s;
+  }
+  #bib-search:focus { border-color:var(--sage); }
+  #bib-search::placeholder { color:var(--mid); opacity:.6; }
+  .bib-filter-row { display:flex; gap:.5rem; flex-wrap:wrap; align-items:center; }
+  .bib-filter-label {
+    font-size:.72rem; letter-spacing:.1em; text-transform:uppercase;
+    color:var(--mid); font-weight:500; margin-right:.3rem;
+  }
+  .bpill {
+    padding:.38rem .9rem; border-radius:100px;
+    border:1px solid var(--border);
+    font-family:'DM Sans',sans-serif; font-size:.78rem; font-weight:400;
+    cursor:pointer; transition:all .18s;
+    background:transparent; color:var(--charcoal); white-space:nowrap;
+  }
+  .bpill:hover { border-color:var(--sage); color:var(--sage); }
+  .bpill.active { color:#fff; border-color:transparent; }
+  .bpill[data-cat="todos"].active    { background:var(--charcoal); }
+  .bpill[data-cat="video"].active    { background:var(--terracotta); }
+  .bpill[data-cat="infografia"].active { background:var(--gold); }
+  .bpill[data-cat="ong"].active      { background:var(--sage); }
+  .bpill[data-cat="telefono"].active { background:var(--plum); }
+
+  .bib-main { max-width:1100px; margin:0 auto; padding:2.5rem 5rem 5rem; }
+  .bib-section-title {
+    font-family:'Fraunces',serif; font-weight:300; font-size:1.1rem;
+    color:var(--mid); margin-bottom:1.4rem; letter-spacing:.02em;
+  }
+  .bib-section-title span { color:var(--charcoal); font-weight:400; }
+
+  .bib-grid {
+    display:grid; grid-template-columns:repeat(auto-fill,minmax(290px,1fr));
+    gap:1.2rem; margin-bottom:3rem;
+  }
+  .bib-card {
+    background:#fff; border:1px solid var(--border); border-radius:14px;
+    overflow:hidden; transition:transform .2s,box-shadow .2s;
+    display:flex; flex-direction:column;
+    cursor:pointer; text-decoration:none; color:inherit;
+  }
+  .bib-card:hover { transform:translateY(-3px); box-shadow:0 12px 32px rgba(0,0,0,.09); }
+  .bib-card-band { height:4px; }
+  .bib-card-band.video    { background:var(--terracotta); }
+  .bib-card-band.infografia { background:var(--gold); }
+  .bib-card-band.ong      { background:var(--sage); }
+  .bib-card-band.telefono { background:var(--plum); }
+  .bib-card-body { padding:1.3rem 1.4rem 1rem; flex:1; }
+  .bib-card-meta { display:flex; align-items:center; gap:.5rem; margin-bottom:.7rem; }
+  .bbadge {
+    font-size:.65rem; letter-spacing:.1em; text-transform:uppercase;
+    font-weight:500; padding:.25rem .65rem; border-radius:100px;
+  }
+  .bbadge.video    { background:rgba(194,112,80,.12); color:var(--terracotta); }
+  .bbadge.infografia { background:var(--gold-pale); color:var(--gold); }
+  .bbadge.ong      { background:var(--sage-pale); color:var(--sage); }
+  .bbadge.telefono { background:var(--plum-pale); color:var(--plum); }
+  .bib-card-tag-extra { font-size:.7rem; color:var(--mid); opacity:.7; }
+  .bib-card-title {
+    font-family:'Fraunces',serif; font-weight:400;
+    font-size:1rem; line-height:1.3; margin-bottom:.5rem; color:var(--charcoal);
+  }
+  .bib-card-desc { font-size:.82rem; color:var(--mid); line-height:1.55; }
+  .bib-card-footer {
+    padding:.8rem 1.4rem 1.1rem;
+    display:flex; align-items:center; justify-content:space-between;
+    border-top:1px solid var(--border); margin-top:.8rem;
+  }
+  .bib-card-lang { font-size:.7rem; color:var(--mid); opacity:.7; }
+  .bib-card-arrow { font-size:.8rem; color:var(--mid); opacity:.5; transition:opacity .15s,transform .15s; }
+  .bib-card:hover .bib-card-arrow { opacity:1; transform:translateX(3px); }
+
+  .phones-grid {
+    display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr));
+    gap:1rem; margin-bottom:3rem;
+  }
+  .phone-card {
+    background:var(--plum-pale); border:1px solid rgba(107,79,114,.12);
+    border-radius:14px; padding:1.4rem;
+    display:flex; flex-direction:column; gap:.5rem;
+  }
+  .phone-icon { font-size:1.4rem; margin-bottom:.2rem; }
+  .phone-name { font-family:'Fraunces',serif; font-weight:400; font-size:.95rem; color:var(--plum); }
+  .phone-num { font-size:1.3rem; font-weight:500; letter-spacing:.04em; color:var(--charcoal); }
+  .phone-hours { font-size:.75rem; color:var(--mid); }
+  .phone-free {
+    display:inline-block; margin-top:.3rem;
+    font-size:.65rem; letter-spacing:.08em; text-transform:uppercase;
+    background:var(--plum); color:#fff; border-radius:100px; padding:.2rem .6rem; font-weight:500;
+  }
+
+  .bib-empty { grid-column:1/-1; text-align:center; padding:4rem 2rem; color:var(--mid); }
+  .bib-empty-icon { font-size:2.5rem; margin-bottom:1rem; }
+  .bib-empty p { font-size:.9rem; }
+
+  /* ── FOOTER ── */
   footer {
-    padding: 3rem 5rem;
-    border-top: 1px solid rgba(0,0,0,0.06);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 1rem;
+    padding: 3rem 5rem; border-top: 1px solid rgba(0,0,0,0.06);
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 1rem;
+    background: var(--charcoal);
   }
-
   .footer-brand {
-    font-family: 'Fraunces', serif;
-    font-style: italic;
-    font-size: 1rem;
-    color: var(--warm-gray);
+    font-family: 'Fraunces', serif; font-style: italic;
+    font-size: 1rem; color: rgba(255,255,255,0.4);
   }
-
-  .footer-note {
-    font-size: 0.78rem;
-    color: rgba(0,0,0,0.3);
-    max-width: 420px;
-    text-align: right;
-  }
+  .footer-note { font-size: 0.78rem; color: rgba(255,255,255,0.2); max-width: 420px; text-align: right; }
 
   @media (max-width: 768px) {
-    .cover, .intro, .section, .emergency, footer {
-      padding-left: 1.5rem;
-      padding-right: 1.5rem;
-    }
+    .cover, .intro, .section, .emergency { padding-left: 1.5rem; padding-right: 1.5rem; }
+    .cover { padding-top: 6rem; }
     .cover-scroll { left: 1.5rem; }
     .signals-grid, .dont-grid { grid-template-columns: 1fr; }
-    footer { flex-direction: column; }
+    .bib-header, .bib-controls, .bib-main { padding-left: 1.4rem; padding-right: 1.4rem; }
+    .bib-controls { top: 48px; }
+    footer { flex-direction: column; padding: 2rem 1.5rem; }
     .footer-note { text-align: left; }
+    .site-nav { padding: 0.7rem 1.2rem; }
   }
 </style>
 </head>
 <body>
 
+<!-- NAV -->
+<nav class="site-nav">
+  <a href="#inicio" class="nav-brand">Calma en la Crisis</a>
+  <ul class="nav-links">
+    <li><a href="#señales">Señales</a></li>
+    <li><a href="#frases">Frases</a></li>
+    <li><a href="#distraccion">Distracción</a></li>
+    <li><a href="#evitar">Qué evitar</a></li>
+    <li><a href="#emergencia">Emergencia</a></li>
+    <li><a href="#biblioteca" class="nav-highlight">📚 Recursos del cuidador</a></li>
+  </ul>
+</nav>
+
 <!-- PORTADA -->
-<section class="cover">
+<section class="cover" id="inicio">
   <p class="cover-tag">Protocolo de Psicogeriatría · Alzheimer</p>
   <h1>Calma en<br><em>la Crisis</em></h1>
   <p class="cover-subtitle">Primeros auxilios emocionales ante la agitación</p>
@@ -671,8 +552,8 @@
   </div>
 </section>
 
-<!-- SECCIÓN 1 – SEÑALES -->
-<section class="section section--signals">
+<!-- SECCIÓN 1 -->
+<section class="section section--signals" id="señales">
   <div class="section-header">
     <span class="section-num">01</span>
     <div class="section-title-block">
@@ -680,48 +561,22 @@
       <h2 class="section-title">Las señales de alarma<br>que el cuerpo avisa</h2>
     </div>
   </div>
-
   <div class="signals-grid">
-    <div class="signal-card">
-      <span class="signal-icon">👀</span>
-      <p class="signal-label">Mirada</p>
-      <p class="signal-desc">Ojos muy abiertos. Mirada esquiva o fija en un punto. Busca algo con los ojos sin encontrarlo.</p>
-    </div>
-    <div class="signal-card">
-      <span class="signal-icon">🤲</span>
-      <p class="signal-label">Manos</p>
-      <p class="signal-desc">Se frota las manos sin parar. Agarra objetos y los suelta. Tira de la ropa repetidamente.</p>
-    </div>
-    <div class="signal-card">
-      <span class="signal-icon">🚶</span>
-      <p class="signal-label">Cuerpo</p>
-      <p class="signal-desc">Se levanta y sienta sin razón aparente. Camina de un lado a otro. Tensión visible en hombros y mandíbula.</p>
-    </div>
-    <div class="signal-card">
-      <span class="signal-icon">🗣️</span>
-      <p class="signal-label">Voz</p>
-      <p class="signal-desc">Tono más alto o más bajo de lo habitual. Repite la misma frase. Habla más deprisa o se queda callado de golpe.</p>
-    </div>
-    <div class="signal-card">
-      <span class="signal-icon">😮‍💨</span>
-      <p class="signal-label">Respiración</p>
-      <p class="signal-desc">Suspiros frecuentes. Respiración más rápida. Aprieta los labios con fuerza.</p>
-    </div>
-    <div class="signal-card">
-      <span class="signal-icon">😤</span>
-      <p class="signal-label">Expresión</p>
-      <p class="signal-desc">Ceño fruncido de forma repentina. Cara tensa. Expresión de desconcierto o miedo que aparece sin motivo claro.</p>
-    </div>
+    <div class="signal-card"><span class="signal-icon">👀</span><p class="signal-label">Mirada</p><p class="signal-desc">Ojos muy abiertos. Mirada esquiva o fija en un punto. Busca algo con los ojos sin encontrarlo.</p></div>
+    <div class="signal-card"><span class="signal-icon">🤲</span><p class="signal-label">Manos</p><p class="signal-desc">Se frota las manos sin parar. Agarra objetos y los suelta. Tira de la ropa repetidamente.</p></div>
+    <div class="signal-card"><span class="signal-icon">🚶</span><p class="signal-label">Cuerpo</p><p class="signal-desc">Se levanta y sienta sin razón aparente. Camina de un lado a otro. Tensión visible en hombros y mandíbula.</p></div>
+    <div class="signal-card"><span class="signal-icon">🗣️</span><p class="signal-label">Voz</p><p class="signal-desc">Tono más alto o más bajo de lo habitual. Repite la misma frase. Habla más deprisa o se queda callado de golpe.</p></div>
+    <div class="signal-card"><span class="signal-icon">😮‍💨</span><p class="signal-label">Respiración</p><p class="signal-desc">Suspiros frecuentes. Respiración más rápida. Aprieta los labios con fuerza.</p></div>
+    <div class="signal-card"><span class="signal-icon">😤</span><p class="signal-label">Expresión</p><p class="signal-desc">Ceño fruncido de forma repentina. Cara tensa. Expresión de desconcierto o miedo que aparece sin motivo claro.</p></div>
   </div>
-
   <div class="signal-alert">
     <span class="signal-alert-icon">⚡</span>
     <p><strong>Actúa cuando veas dos o más señales a la vez.</strong> No esperes a que la crisis estalle. Cuanto antes intervengas, más fácil es calmar.</p>
   </div>
 </section>
 
-<!-- SECCIÓN 2 – FRASES MÁGICAS -->
-<section class="section section--phrases">
+<!-- SECCIÓN 2 -->
+<section class="section section--phrases" id="frases">
   <div class="section-header">
     <span class="section-num">02</span>
     <div class="section-title-block">
@@ -729,7 +584,6 @@
       <h2 class="section-title">Tres frases que funcionan<br>cuando nada parece funcionar</h2>
     </div>
   </div>
-
   <div class="phrase-stack">
     <div class="phrase-card">
       <div class="phrase-number">1</div>
@@ -738,7 +592,6 @@
         <p class="phrase-why"><strong>Por qué funciona:</strong> No discutes lo que dice. Le dices que su emoción es válida. Eso baja la defensa inmediatamente.</p>
       </div>
     </div>
-
     <div class="phrase-card">
       <div class="phrase-number">2</div>
       <div class="phrase-content">
@@ -746,7 +599,6 @@
         <p class="phrase-why"><strong>Por qué funciona:</strong> La agitación casi siempre viene del miedo. Esta frase actúa directamente sobre ese miedo. Dila despacio, con voz suave.</p>
       </div>
     </div>
-
     <div class="phrase-card">
       <div class="phrase-number">3</div>
       <div class="phrase-content">
@@ -755,14 +607,13 @@
       </div>
     </div>
   </div>
-
   <div class="phrase-tip">
     <strong>Recuerda:</strong> El tono importa más que las palabras. Voz baja, pausada, sin urgencia. Agáchate a su altura si está sentado. Contacto visual suave, sin fijar la mirada. Un toque suave en el brazo, si lo tolera.
   </div>
 </section>
 
-<!-- SECCIÓN 3 – DISTRACCIÓN -->
-<section class="section section--distraction">
+<!-- SECCIÓN 3 -->
+<section class="section section--distraction" id="distraccion">
   <div class="section-header">
     <span class="section-num">03</span>
     <div class="section-title-block">
@@ -770,45 +621,13 @@
       <h2 class="section-title">La técnica de la distracción:<br>cómo y cuándo usarla</h2>
     </div>
   </div>
-
   <div class="distraction-flow">
-    <div class="dist-step">
-      <div class="dist-dot">🛑</div>
-      <div class="dist-body">
-        <p class="dist-step-label">Paso 1 · Detén lo que estabas haciendo</p>
-        <p class="dist-step-text">Interrumpe la actividad que desencadenó la agitación. <em>No la acabes. Para. Ahora.</em></p>
-      </div>
-    </div>
-    <div class="dist-step">
-      <div class="dist-dot">🌿</div>
-      <div class="dist-body">
-        <p class="dist-step-label">Paso 2 · Valida primero (10 segundos)</p>
-        <p class="dist-step-text">Usa una de las tres frases del apartado anterior. No saltes directo a la distracción. Valida primero. <em>Siempre.</em></p>
-      </div>
-    </div>
-    <div class="dist-step">
-      <div class="dist-dot">🔀</div>
-      <div class="dist-body">
-        <p class="dist-step-label">Paso 3 · Introduce algo familiar</p>
-        <p class="dist-step-text">Propón algo de su pasado que le gustara. Un objeto conocido, una música, una foto. <em>"¿Me ayudas con esto?"</em> funciona muy bien.</p>
-      </div>
-    </div>
-    <div class="dist-step">
-      <div class="dist-dot">🏃</div>
-      <div class="dist-body">
-        <p class="dist-step-label">Paso 4 · Cambia el espacio si hace falta</p>
-        <p class="dist-step-text">A veces el entorno es el problema. Llévale a otra habitación, a la ventana, al jardín. <em>El movimiento ayuda.</em></p>
-      </div>
-    </div>
-    <div class="dist-step">
-      <div class="dist-dot">✅</div>
-      <div class="dist-body">
-        <p class="dist-step-label">Paso 5 · No mires atrás</p>
-        <p class="dist-step-text">Una vez calmado, no retomes lo que pasó. No lo analices con él. <em>Déjalo ir. Tú también.</em></p>
-      </div>
-    </div>
+    <div class="dist-step"><div class="dist-dot">🛑</div><div class="dist-body"><p class="dist-step-label">Paso 1 · Detén lo que estabas haciendo</p><p class="dist-step-text">Interrumpe la actividad que desencadenó la agitación. <em>No la acabes. Para. Ahora.</em></p></div></div>
+    <div class="dist-step"><div class="dist-dot">🌿</div><div class="dist-body"><p class="dist-step-label">Paso 2 · Valida primero (10 segundos)</p><p class="dist-step-text">Usa una de las tres frases del apartado anterior. No saltes directo a la distracción. Valida primero. <em>Siempre.</em></p></div></div>
+    <div class="dist-step"><div class="dist-dot">🔀</div><div class="dist-body"><p class="dist-step-label">Paso 3 · Introduce algo familiar</p><p class="dist-step-text">Propón algo de su pasado que le gustara. Un objeto conocido, una música, una foto. <em>"¿Me ayudas con esto?"</em> funciona muy bien.</p></div></div>
+    <div class="dist-step"><div class="dist-dot">🏃</div><div class="dist-body"><p class="dist-step-label">Paso 4 · Cambia el espacio si hace falta</p><p class="dist-step-text">A veces el entorno es el problema. Llévale a otra habitación, a la ventana, al jardín. <em>El movimiento ayuda.</em></p></div></div>
+    <div class="dist-step"><div class="dist-dot">✅</div><div class="dist-body"><p class="dist-step-label">Paso 5 · No mires atrás</p><p class="dist-step-text">Una vez calmado, no retomes lo que pasó. No lo analices con él. <em>Déjalo ir. Tú también.</em></p></div></div>
   </div>
-
   <div class="distraction-examples">
     <h4>Ideas de distracción que suelen funcionar</h4>
     <div class="examples-grid">
@@ -826,8 +645,8 @@
   </div>
 </section>
 
-<!-- SECCIÓN 4 – QUÉ NO HACER -->
-<section class="section section--dont">
+<!-- SECCIÓN 4 -->
+<section class="section section--dont" id="evitar">
   <div class="section-header">
     <span class="section-num">04</span>
     <div class="section-title-block">
@@ -835,49 +654,18 @@
       <h2 class="section-title">Lo que nunca debes hacer,<br>aunque estés agotado</h2>
     </div>
   </div>
-
   <div class="dont-grid">
-    <div class="dont-card">
-      <span class="dont-icon">🗣️</span>
-      <p class="dont-title">Discutir o corregirle</p>
-      <p class="dont-desc">Nunca digas "eso no es verdad" o "ya te dije que…". Para él, su realidad es real. Discutir solo escala la agitación.</p>
-      <p class="dont-instead">Dile: "Entiendo que lo ves así."</p>
-    </div>
-    <div class="dont-card">
-      <span class="dont-icon">✋</span>
-      <p class="dont-title">Sujetar o bloquear</p>
-      <p class="dont-desc">Inmovilizarle físicamente activa el miedo y el instinto de defensa. Puede provocar el doble de agitación.</p>
-      <p class="dont-instead">Dale espacio. Acompáñale sin retenerle.</p>
-    </div>
-    <div class="dont-card">
-      <span class="dont-icon">📢</span>
-      <p class="dont-title">Gritar o elevar la voz</p>
-      <p class="dont-desc">Tu tono es contagioso. Si subes la voz, él sube la suya. Si la bajas, él la baja. Eres el regulador emocional.</p>
-      <p class="dont-instead">Habla más despacio. Más bajo. Más pausado.</p>
-    </div>
-    <div class="dont-card">
-      <span class="dont-icon">⏱️</span>
-      <p class="dont-title">Exigir rapidez</p>
-      <p class="dont-desc">"Vamos, date prisa" dispara la ansiedad. Su cerebro no puede procesar a tu ritmo en ese momento.</p>
-      <p class="dont-instead">Elimina las prisas. Ajusta tus tiempos.</p>
-    </div>
-    <div class="dont-card">
-      <span class="dont-icon">🧩</span>
-      <p class="dont-title">Razonar con lógica</p>
-      <p class="dont-desc">"Pero si acabamos de comer" no funciona. En la crisis, la lógica no llega. Las emociones sí.</p>
-      <p class="dont-instead">Conecta con la emoción, no con los hechos.</p>
-    </div>
-    <div class="dont-card">
-      <span class="dont-icon">😶</span>
-      <p class="dont-title">Ignorarle o alejarte</p>
-      <p class="dont-desc">Quedarse solo durante una crisis puede aterrorizarle. El abandono, real o percibido, empeora todo.</p>
-      <p class="dont-instead">Quédate cerca, aunque sin hablar.</p>
-    </div>
+    <div class="dont-card"><span class="dont-icon">🗣️</span><p class="dont-title">Discutir o corregirle</p><p class="dont-desc">Nunca digas "eso no es verdad" o "ya te dije que…". Para él, su realidad es real. Discutir solo escala la agitación.</p><p class="dont-instead">Dile: "Entiendo que lo ves así."</p></div>
+    <div class="dont-card"><span class="dont-icon">✋</span><p class="dont-title">Sujetar o bloquear</p><p class="dont-desc">Inmovilizarle físicamente activa el miedo y el instinto de defensa. Puede provocar el doble de agitación.</p><p class="dont-instead">Dale espacio. Acompáñale sin retenerle.</p></div>
+    <div class="dont-card"><span class="dont-icon">📢</span><p class="dont-title">Gritar o elevar la voz</p><p class="dont-desc">Tu tono es contagioso. Si subes la voz, él sube la suya. Si la bajas, él la baja. Eres el regulador emocional.</p><p class="dont-instead">Habla más despacio. Más bajo. Más pausado.</p></div>
+    <div class="dont-card"><span class="dont-icon">⏱️</span><p class="dont-title">Exigir rapidez</p><p class="dont-desc">"Vamos, date prisa" dispara la ansiedad. Su cerebro no puede procesar a tu ritmo en ese momento.</p><p class="dont-instead">Elimina las prisas. Ajusta tus tiempos.</p></div>
+    <div class="dont-card"><span class="dont-icon">🧩</span><p class="dont-title">Razonar con lógica</p><p class="dont-desc">"Pero si acabamos de comer" no funciona. En la crisis, la lógica no llega. Las emociones sí.</p><p class="dont-instead">Conecta con la emoción, no con los hechos.</p></div>
+    <div class="dont-card"><span class="dont-icon">😶</span><p class="dont-title">Ignorarle o alejarte</p><p class="dont-desc">Quedarse solo durante una crisis puede aterrorizarle. El abandono, real o percibido, empeora todo.</p><p class="dont-instead">Quédate cerca, aunque sin hablar.</p></div>
   </div>
 </section>
 
 <!-- TARJETA DE EMERGENCIA -->
-<section class="emergency">
+<section class="emergency" id="emergencia">
   <div class="emergency-card">
     <p class="emergency-label">Para el bolsillo · Resumen de emergencia</p>
     <h2 class="emergency-title">Si la crisis ya empezó:<br>cinco pasos en 2 minutos</h2>
@@ -892,11 +680,163 @@
   </div>
 </section>
 
+<!-- ══════════════════════════════════════════
+     BIBLIOTECA DE RECURSOS
+══════════════════════════════════════════ -->
+<section id="biblioteca">
+
+  <div class="bib-header">
+    <div class="bib-header-inner">
+      <p class="bib-header-tag">Calma en la Crisis · Para el cuidador</p>
+      <h2>Biblioteca de<br><em>recursos</em></h2>
+      <p class="bib-header-sub">Cuidar a alguien te cambia. Esta sección es para ti: herramientas, guías y contactos para no agotarte en el camino.</p>
+      <div class="bib-count">
+        <span class="bib-dot"></span>
+        <span id="bib-total-count">Cargando recursos...</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="bib-controls">
+    <div class="bib-controls-inner">
+      <div class="bib-search-wrap">
+        <span class="bib-search-icon">🔍</span>
+        <input type="text" id="bib-search" placeholder="Buscar recursos, temas, organizaciones...">
+      </div>
+      <div class="bib-filter-row">
+        <span class="bib-filter-label">Filtrar:</span>
+        <button class="bpill active" data-cat="todos">Todos</button>
+        <button class="bpill" data-cat="video">🎬 Vídeos y podcasts</button>
+        <button class="bpill" data-cat="infografia">📄 Guías e infografías</button>
+        <button class="bpill" data-cat="ong">🤝 ONGs y asociaciones</button>
+        <button class="bpill" data-cat="telefono">📞 Teléfonos de ayuda</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="bib-main">
+    <div id="bib-phones-section">
+      <p class="bib-section-title"><span>Líneas de ayuda inmediata</span> · Disponibles ahora</p>
+      <div class="phones-grid" id="bib-phones-grid"></div>
+    </div>
+    <p class="bib-section-title" id="bib-resources-label"><span>Todos los recursos</span></p>
+    <div class="bib-grid" id="bib-grid"></div>
+  </div>
+
+</section>
+
 <!-- FOOTER -->
 <footer>
   <p class="footer-brand">Calma en la Crisis · Primeros auxilios emocionales</p>
   <p class="footer-note">Esta guía no sustituye la valoración clínica. Consúltala con el especialista en psicogeriatría que acompaña a tu familia.</p>
 </footer>
 
+<script>
+const phones = [
+  { icon:'🧠', name:'Línea de Atención al Cuidador', num:'900 100 036', hours:'Lun–Vie 9:00–18:00', free:true },
+  { icon:'💙', name:'Teléfono de la Esperanza', num:'717 003 717', hours:'24 horas · 365 días', free:true },
+  { icon:'🌿', name:'IMSERSO · Info mayores', num:'900 222 990', hours:'Lun–Vie 9:00–21:00', free:true },
+  { icon:'🤝', name:'CEAFA · Alzheimer España', num:'901 500 508', hours:'Lun–Vie 9:00–14:00', free:true },
+];
+
+const resources = [
+  { cat:'video', title:'Cómo evitar el síndrome del cuidador quemado', desc:'Vídeo explicativo del IMSERSO con señales de alerta y estrategias prácticas para cuidadores familiares.', tag:'YouTube · IMSERSO', lang:'🇪🇸 Español', url:'https://www.youtube.com/results?search_query=sindrome+cuidador+quemado+IMSERSO' },
+  { cat:'video', title:'Podcast "Cuidar sin descuidarte"', desc:'Serie de episodios sobre autocuidado emocional para cuidadores de personas con demencia.', tag:'Podcast · Spotify', lang:'🇪🇸 Español', url:'https://open.spotify.com/search/cuidar%20sin%20descuidarte' },
+  { cat:'video', title:'Mindfulness para cuidadores – Sesión guiada', desc:'Meditación guiada de 15 minutos especialmente diseñada para momentos de alta tensión emocional.', tag:'YouTube · Mindfulness', lang:'🇪🇸 Español', url:'https://www.youtube.com/results?search_query=mindfulness+para+cuidadores' },
+  { cat:'video', title:'Entrevista: El duelo del cuidador', desc:'Psicóloga especializada en psicogeriatría habla sobre el duelo anticipado y cómo gestionarlo.', tag:'YouTube · Psicología', lang:'🇪🇸 Español', url:'https://www.youtube.com/results?search_query=duelo+del+cuidador+psicologia' },
+  { cat:'video', title:'Técnicas de respiración para crisis de estrés', desc:'Vídeo corto con tres técnicas de respiración que se pueden usar en el momento de máxima tensión.', tag:'YouTube · Bienestar', lang:'🇪🇸 Español', url:'https://www.youtube.com/results?search_query=tecnicas+respiracion+estres+cuidadores' },
+  { cat:'infografia', title:'Guía de autocuidado para cuidadores familiares', desc:'Guía práctica del Ministerio de Sanidad con rutinas, señales de alerta y recursos de apoyo.', tag:'PDF · Ministerio de Sanidad', lang:'🇪🇸 Español', url:'https://www.mscbs.gob.es/profesionales/saludPublica/prevPromocion/Estrategia/docs/GuiaCuidadoresFamiliares.pdf' },
+  { cat:'infografia', title:'Infografía: Las 10 señales del burnout del cuidador', desc:'Resumen visual fácil de imprimir con las señales más comunes de agotamiento en cuidadores.', tag:'Infografía · CEAFA', lang:'🇪🇸 Español', url:'https://www.ceafa.es/es/que-hacemos/publicaciones' },
+  { cat:'infografia', title:'Manual de habilidades para cuidadores de personas con demencia', desc:'Manual completo de la Fundación Alzheimer España con técnicas de comunicación y gestión emocional.', tag:'PDF · Alzheimer España', lang:'🇪🇸 Español', url:'https://www.alzheimer-europe.org/resources/publications' },
+  { cat:'infografia', title:'Cuaderno de ejercicios: Gestión del estrés', desc:'Cuaderno descargable con ejercicios prácticos semanales para reducir el estrés acumulado.', tag:'PDF · Cruz Roja', lang:'🇪🇸 Español', url:'https://www.cruzroja.es/principal/web/mayores/cuidadores' },
+  { cat:'ong', title:'Alzheimer España (CEAFA)', desc:'Confederación española de asociaciones de familiares. Ofrece grupos de apoyo, formación y asesoramiento jurídico.', tag:'ONG Nacional', lang:'🌐 ceafa.es', url:'https://www.ceafa.es' },
+  { cat:'ong', title:'Fundación Alzheimer España', desc:'Información, recursos y apoyo emocional para familias. Dispone de servicio de orientación telefónica gratuita.', tag:'Fundación Nacional', lang:'🌐 alzheimer-esp.org', url:'https://www.alzheimer-esp.org' },
+  { cat:'ong', title:'Cruz Roja · Programa de cuidadores', desc:'Programa de respiro y apoyo domiciliario para cuidadores. Presencia en toda España.', tag:'ONG Nacional', lang:'🌐 cruzroja.es', url:'https://www.cruzroja.es/principal/web/mayores/cuidadores' },
+  { cat:'ong', title:'Asociación de Familiares de Enfermos de Alzheimer (AFA)', desc:'Red de asociaciones locales con grupos de autoayuda, talleres y acompañamiento personalizado.', tag:'Red de asociaciones', lang:'🌐 afal.es', url:'https://www.afal.es' },
+  { cat:'ong', title:'IMSERSO · Servicios sociales', desc:'Portal oficial con información sobre ayudas, residencias, centros de día y prestaciones económicas.', tag:'Organismo público', lang:'🌐 imserso.gob.es', url:'https://www.imserso.es' },
+  { cat:'ong', title:'Caritas · Apoyo a cuidadores', desc:'Servicio de acompañamiento, grupos de reflexión y ayuda práctica para cuidadores en situación de vulnerabilidad.', tag:'ONG Nacional', lang:'🌐 caritas.es', url:'https://www.caritas.es' },
+  { cat:'telefono', title:'App "Cuídate, cuidador" · Plataforma digital', desc:'Plataforma online con chat de apoyo, recursos personalizados y comunidad de cuidadores.', tag:'App · Gratuita', lang:'🌐 Web y móvil', url:'https://www.cuidateycuida.es' },
+  { cat:'telefono', title:'Foro de cuidadores · CEAFA Online', desc:'Comunidad virtual donde compartir experiencias, hacer preguntas y recibir apoyo de otros cuidadores.', tag:'Foro · Gratuito', lang:'🌐 ceafa.es/foro', url:'https://www.ceafa.es/es/que-hacemos/grupos-de-apoyo' },
+  { cat:'telefono', title:'Whatsapp de apoyo · Cruz Roja', desc:'Canal de mensajería directa con profesionales de Cruz Roja para orientación rápida a cuidadores.', tag:'WhatsApp · Gratuito', lang:'🇪🇸 Español', url:'https://www.cruzroja.es' },
+];
+
+let currentCat = 'todos';
+let currentSearch = '';
+
+function renderPhones() {
+  const pg = document.getElementById('bib-phones-grid');
+  const ps = document.getElementById('bib-phones-section');
+  const show = currentCat === 'todos' || currentCat === 'telefono';
+  ps.style.display = show ? 'block' : 'none';
+  if (!show) return;
+  pg.innerHTML = phones.map(p => `
+    <div class="phone-card">
+      <div class="phone-icon">${p.icon}</div>
+      <div class="phone-name">${p.name}</div>
+      <div class="phone-num">${p.num}</div>
+      <div class="phone-hours">${p.hours}</div>
+      ${p.free ? '<span class="phone-free">Llamada gratuita</span>' : ''}
+    </div>
+  `).join('');
+}
+
+function labelFor(cat) {
+  return {video:'🎬 Vídeo/Podcast', infografia:'📄 Guía/Infografía', ong:'🤝 ONG', telefono:'📞 Apoyo digital'}[cat] || cat;
+}
+
+function renderCards() {
+  const grid = document.getElementById('bib-grid');
+  const label = document.getElementById('bib-resources-label');
+  let filtered = resources.filter(r => {
+    const matchCat = currentCat === 'todos' || r.cat === currentCat;
+    const q = currentSearch.toLowerCase();
+    const matchSearch = !q || r.title.toLowerCase().includes(q) || r.desc.toLowerCase().includes(q) || r.tag.toLowerCase().includes(q);
+    return matchCat && matchSearch;
+  });
+  const total = resources.length + phones.length;
+  document.getElementById('bib-total-count').textContent = `${total} recursos disponibles`;
+  const catNames = { todos:'Todos los recursos', video:'Vídeos y podcasts', infografia:'Guías e infografías', ong:'ONGs y asociaciones', telefono:'Recursos digitales de apoyo' };
+  label.innerHTML = `<span>${catNames[currentCat]}</span>${currentSearch ? ` · "${currentSearch}"` : ''}`;
+  if (filtered.length === 0) {
+    grid.innerHTML = `<div class="bib-empty"><div class="bib-empty-icon">🔍</div><p>No se han encontrado recursos para esta búsqueda.<br>Prueba con otras palabras.</p></div>`;
+    return;
+  }
+  grid.innerHTML = filtered.map(r => `
+    <a class="bib-card" href="${r.url}" target="_blank" rel="noopener">
+      <div class="bib-card-band ${r.cat}"></div>
+      <div class="bib-card-body">
+        <div class="bib-card-meta">
+          <span class="bbadge ${r.cat}">${labelFor(r.cat)}</span>
+          <span class="bib-card-tag-extra">${r.tag}</span>
+        </div>
+        <div class="bib-card-title">${r.title}</div>
+        <div class="bib-card-desc">${r.desc}</div>
+      </div>
+      <div class="bib-card-footer">
+        <span class="bib-card-lang">${r.lang}</span>
+        <span class="bib-card-arrow">→</span>
+      </div>
+    </a>
+  `).join('');
+}
+
+document.querySelectorAll('.bpill').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.bpill').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    currentCat = btn.dataset.cat;
+    renderPhones();
+    renderCards();
+  });
+});
+
+document.getElementById('bib-search').addEventListener('input', e => {
+  currentSearch = e.target.value;
+  renderCards();
+});
+
+renderPhones();
+renderCards();
+</script>
 </body>
 </html>
