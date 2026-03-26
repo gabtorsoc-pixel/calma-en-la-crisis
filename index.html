@@ -513,6 +513,223 @@
     .footer-note { text-align: left; }
     .site-nav { padding: 0.7rem 1.2rem; }
   }
+
+  /* ══════════════════════════════════════════
+     BOT FLOTANTE
+  ══════════════════════════════════════════ */
+
+  /* Botón flotante */
+  #chat-toggle {
+    position: fixed;
+    bottom: 1.8rem;
+    right: 1.8rem;
+    z-index: 1000;
+    width: 60px; height: 60px;
+    border-radius: 50%;
+    background: var(--sage);
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(107,143,113,0.45);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.5rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  #chat-toggle:hover {
+    transform: scale(1.08);
+    box-shadow: 0 6px 28px rgba(107,143,113,0.55);
+  }
+  #chat-toggle .chat-badge {
+    position: absolute;
+    top: -2px; right: -2px;
+    width: 18px; height: 18px;
+    background: var(--terracotta);
+    border-radius: 50%;
+    border: 2px solid var(--cream);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.55rem;
+    color: #fff; font-weight: 600;
+  }
+
+  /* Ventana del chat */
+  #chat-window {
+    position: fixed;
+    bottom: 5.5rem;
+    right: 1.8rem;
+    z-index: 999;
+    width: 360px;
+    max-height: 560px;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 16px 56px rgba(0,0,0,0.18);
+    display: flex; flex-direction: column;
+    overflow: hidden;
+    transform: scale(0.92) translateY(12px);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.22s cubic-bezier(.34,1.3,.64,1), opacity 0.18s;
+  }
+  #chat-window.open {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  /* Header del chat */
+  .chat-header {
+    background: var(--charcoal);
+    padding: 1rem 1.2rem;
+    display: flex; align-items: center; gap: 0.75rem;
+    flex-shrink: 0;
+  }
+  .chat-header-avatar {
+    width: 36px; height: 36px;
+    background: var(--sage);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem; flex-shrink: 0;
+  }
+  .chat-header-info { flex: 1; }
+  .chat-header-name {
+    font-family: 'Fraunces', serif; font-weight: 400;
+    font-size: 0.95rem; color: #fff; line-height: 1.1;
+  }
+  .chat-header-status {
+    font-size: 0.68rem; color: var(--sage-light);
+    display: flex; align-items: center; gap: 0.3rem;
+  }
+  .chat-header-status::before {
+    content: ''; display: inline-block;
+    width: 6px; height: 6px;
+    background: var(--sage-light);
+    border-radius: 50%;
+  }
+  .chat-close {
+    background: none; border: none; cursor: pointer;
+    color: rgba(255,255,255,0.4); font-size: 1.1rem;
+    padding: 0.2rem; transition: color 0.15s;
+  }
+  .chat-close:hover { color: #fff; }
+
+  /* Chips de acceso rápido */
+  .chat-chips {
+    padding: 0.8rem 1rem 0;
+    display: flex; flex-wrap: wrap; gap: 0.4rem;
+    flex-shrink: 0;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 0.8rem;
+  }
+  .chip {
+    padding: 0.3rem 0.75rem;
+    border-radius: 100px;
+    border: 1px solid var(--border);
+    font-size: 0.72rem; font-family: 'DM Sans', sans-serif;
+    cursor: pointer; background: var(--cream);
+    color: var(--charcoal);
+    transition: all 0.15s; white-space: nowrap;
+  }
+  .chip:hover { background: var(--sage-pale); border-color: var(--sage); color: var(--sage); }
+  .chip.crisis { background: rgba(194,112,80,0.1); border-color: var(--terracotta); color: var(--terracotta); font-weight: 500; }
+  .chip.crisis:hover { background: var(--terracotta); color: #fff; }
+
+  /* Mensajes */
+  .chat-messages {
+    flex: 1; overflow-y: auto;
+    padding: 1rem;
+    display: flex; flex-direction: column; gap: 0.75rem;
+    scroll-behavior: smooth;
+  }
+  .chat-messages::-webkit-scrollbar { width: 4px; }
+  .chat-messages::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.1); border-radius: 2px; }
+
+  .msg {
+    display: flex; gap: 0.5rem; align-items: flex-end;
+    animation: msgIn 0.2s ease-out;
+  }
+  @keyframes msgIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .msg.user { flex-direction: row-reverse; }
+
+  .msg-avatar {
+    width: 26px; height: 26px; border-radius: 50%;
+    background: var(--sage-pale);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.75rem; flex-shrink: 0;
+  }
+  .msg.user .msg-avatar { background: var(--charcoal); color: #fff; }
+
+  .msg-bubble {
+    max-width: 82%;
+    padding: 0.65rem 0.9rem;
+    border-radius: 14px;
+    font-size: 0.85rem; line-height: 1.55;
+    color: var(--charcoal);
+  }
+  .msg.bot .msg-bubble {
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-bottom-left-radius: 4px;
+  }
+  .msg.user .msg-bubble {
+    background: var(--charcoal);
+    color: #fff;
+    border-bottom-right-radius: 4px;
+  }
+  .msg-bubble strong { font-weight: 500; }
+  .msg-bubble em { font-style: italic; color: var(--warm-gray); }
+
+  /* Typing indicator */
+  .typing-indicator {
+    display: flex; gap: 4px; align-items: center;
+    padding: 0.7rem 0.9rem;
+  }
+  .typing-indicator span {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--sage-light);
+    animation: bounce 1.2s infinite;
+  }
+  .typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
+  .typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes bounce {
+    0%, 60%, 100% { transform: translateY(0); }
+    30% { transform: translateY(-5px); }
+  }
+
+  /* Input */
+  .chat-input-area {
+    padding: 0.75rem 1rem;
+    border-top: 1px solid var(--border);
+    display: flex; gap: 0.5rem; align-items: center;
+    flex-shrink: 0;
+  }
+  #chat-input {
+    flex: 1;
+    padding: 0.6rem 0.9rem;
+    border: 1px solid var(--border); border-radius: 100px;
+    font-family: 'DM Sans', sans-serif; font-size: 0.85rem; font-weight: 300;
+    background: var(--cream); color: var(--charcoal);
+    outline: none; transition: border-color 0.15s;
+    resize: none;
+  }
+  #chat-input:focus { border-color: var(--sage); }
+  #chat-input::placeholder { color: var(--mid); opacity: 0.6; }
+  #chat-send {
+    width: 36px; height: 36px;
+    border-radius: 50%; background: var(--sage);
+    border: none; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.9rem; color: #fff;
+    transition: background 0.15s, transform 0.15s;
+    flex-shrink: 0;
+  }
+  #chat-send:hover { background: var(--charcoal); transform: scale(1.05); }
+  #chat-send:disabled { background: var(--border); cursor: not-allowed; transform: none; }
+
+  @media (max-width: 480px) {
+    #chat-window { width: calc(100vw - 2rem); right: 1rem; bottom: 5rem; }
+    #chat-toggle { bottom: 1.2rem; right: 1.2rem; }
+  }
 </style>
 </head>
 <body>
@@ -837,6 +1054,180 @@ document.getElementById('bib-search').addEventListener('input', e => {
 
 renderPhones();
 renderCards();
+</script>
+
+<!-- ══════════════════════════════════════════
+     BOT FLOTANTE
+══════════════════════════════════════════ -->
+<button id="chat-toggle" aria-label="Abrir asistente">🌿<span class="chat-badge">IA</span></button>
+
+<div id="chat-window" role="dialog" aria-label="Asistente Calma en la Crisis">
+  <div class="chat-header">
+    <div class="chat-header-avatar">🌿</div>
+    <div class="chat-header-info">
+      <p class="chat-header-name">Asistente · Calma en la Crisis</p>
+      <p class="chat-header-status">Disponible ahora</p>
+    </div>
+    <button class="chat-close" id="chat-close" aria-label="Cerrar">✕</button>
+  </div>
+  <div class="chat-chips">
+    <button class="chip crisis" data-msg="Tengo una crisis ahora mismo, necesito orientación urgente">🚨 Crisis ahora</button>
+    <button class="chip" data-msg="¿Cuáles son los pasos del protocolo de desescalada?">📋 El protocolo</button>
+    <button class="chip" data-msg="Estoy muy agotado como cuidador, ¿qué puedo hacer?">💙 Estoy agotado</button>
+    <button class="chip" data-msg="¿Qué recursos hay disponibles para cuidadores?">📚 Recursos</button>
+  </div>
+  <div class="chat-messages" id="chat-messages"></div>
+  <div class="chat-input-area">
+    <input type="text" id="chat-input" placeholder="Escribe tu pregunta..." autocomplete="off" maxlength="500">
+    <button id="chat-send" aria-label="Enviar">→</button>
+  </div>
+</div>
+
+<script>
+(function() {
+  const SYSTEM_PROMPT = `Eres el asistente de "Calma en la Crisis", una guía de primeros auxilios emocionales para cuidadores de personas con Alzheimer o demencia.
+
+Tu misión es orientar tanto a familiares cuidadores como a auxiliares profesionales. Adapta tu lenguaje según cómo habla la persona: más cercano y emocional con familiares, más técnico y directo con profesionales.
+
+PROTOCOLO DE DESESCALADA (5 pasos que debes conocer a fondo):
+1. PARA Y RESPIRA: Tómate 5 segundos. Detén lo que estás haciendo.
+2. BAJA A SU NIVEL: Mantén contacto visual suave. Agáchate si está sentado.
+3. VOZ CALMADA: Habla suave, despacio, sin urgencia. Tu tono es contagioso.
+4. VALIDA la emoción: "Entiendo que estés asustado/a. Estoy aquí contigo." No contradigas, no corrijas.
+5. RE-ORIENTA: Ofrece algo familiar (música que le guste, una foto, una bebida, una actividad conocida).
+
+SEÑALES DE ALARMA previas a la crisis: ojos muy abiertos o mirada fija, frotarse las manos, levantarse y sentarse sin razón, tono de voz cambiado, suspiros frecuentes, ceño fruncido repentino.
+
+NUNCA hacer durante una crisis: discutir o corregir, sujetar físicamente, elevar la voz, exigir rapidez, razonar con lógica, ignorar o alejarse.
+
+RECURSOS DISPONIBLES en la biblioteca (sección final de la web):
+- Líneas de ayuda: Línea del Cuidador 900 100 036, Teléfono de la Esperanza 717 003 717, CEAFA 901 500 508
+- Vídeos sobre burnout del cuidador, mindfulness, duelo anticipado
+- Guías PDF del Ministerio de Sanidad, Cruz Roja, Alzheimer España
+- ONGs: CEAFA, Fundación Alzheimer España, Cruz Roja, AFAL, IMSERSO, Cáritas
+
+MODO CRISIS ACTIVA: Si la persona dice que hay una crisis en este momento, responde con pasos muy cortos, numerados, directos y con mucha calma. Máximo 3-4 líneas por mensaje. Usa un tono sereno y firme.
+
+APOYO EMOCIONAL: Si el cuidador expresa agotamiento, culpa o desesperanza, valida primero su emoción antes de dar información. Recuérdales que pedir ayuda es un acto de valentía, no de debilidad.
+
+Responde siempre en español. Sé conciso: máximo 4-5 frases salvo que sea necesario más detalle. Nunca uses listas largas. Prioriza la calidez y la claridad.`;
+
+  const messagesEl = document.getElementById('chat-messages');
+  const inputEl = document.getElementById('chat-input');
+  const sendBtn = document.getElementById('chat-send');
+  const toggleBtn = document.getElementById('chat-toggle');
+  const closeBtn = document.getElementById('chat-close');
+  const chatWindow = document.getElementById('chat-window');
+
+  let history = [];
+  let isOpen = false;
+  let greeted = false;
+
+  function toggleChat() {
+    isOpen = !isOpen;
+    chatWindow.classList.toggle('open', isOpen);
+    toggleBtn.textContent = isOpen ? '✕' : '🌿';
+    if (isOpen) {
+      if (!greeted) {
+        greeted = true;
+        addMessage('bot', 'Hola. Estoy aquí para ayudarte.\n\nPuedes preguntarme sobre el protocolo de desescalada, recursos para cuidadores, o simplemente contarme cómo estás. Si hay una crisis ahora mismo, pulsa el botón rojo.');
+      }
+      setTimeout(() => inputEl.focus(), 300);
+    }
+  }
+
+  toggleBtn.addEventListener('click', toggleChat);
+  closeBtn.addEventListener('click', () => { isOpen = true; toggleChat(); });
+
+  document.querySelectorAll('.chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      const msg = chip.dataset.msg;
+      if (!isOpen) { isOpen = false; toggleChat(); }
+      setTimeout(() => sendMessage(msg), isOpen ? 0 : 350);
+    });
+  });
+
+  function addMessage(role, text) {
+    const div = document.createElement('div');
+    div.className = `msg ${role}`;
+    const avatar = document.createElement('div');
+    avatar.className = 'msg-avatar';
+    avatar.textContent = role === 'bot' ? '🌿' : '👤';
+    const bubble = document.createElement('div');
+    bubble.className = 'msg-bubble';
+    bubble.innerHTML = text.replace(/\n/g, '<br>').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+    div.appendChild(avatar);
+    div.appendChild(bubble);
+    messagesEl.appendChild(div);
+    messagesEl.scrollTop = messagesEl.scrollHeight;
+    return div;
+  }
+
+  function addTyping() {
+    const div = document.createElement('div');
+    div.className = 'msg bot';
+    div.id = 'typing-msg';
+    div.innerHTML = `<div class="msg-avatar">🌿</div><div class="msg-bubble"><div class="typing-indicator"><span></span><span></span><span></span></div></div>`;
+    messagesEl.appendChild(div);
+    messagesEl.scrollTop = messagesEl.scrollHeight;
+  }
+
+  function removeTyping() {
+    const t = document.getElementById('typing-msg');
+    if (t) t.remove();
+  }
+
+  async function sendMessage(text) {
+    const msg = (text || inputEl.value).trim();
+    if (!msg) return;
+    inputEl.value = '';
+    sendBtn.disabled = true;
+
+    if (!isOpen) toggleChat();
+    addMessage('user', msg);
+    history.push({ role: 'user', content: msg });
+
+    addTyping();
+
+    try {
+      const res = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          model: 'claude-sonnet-4-20250514',
+          max_tokens: 1000,
+          system: SYSTEM_PROMPT,
+          messages: history
+        })
+      });
+      const data = await res.json();
+      const reply = data.content?.[0]?.text || 'Lo siento, ha habido un problema. Por favor inténtalo de nuevo.';
+      removeTyping();
+      addMessage('bot', reply);
+      history.push({ role: 'assistant', content: reply });
+      if (history.length > 20) history = history.slice(-20);
+    } catch (e) {
+      removeTyping();
+      addMessage('bot', 'No he podido conectar ahora mismo. Si es una emergencia, llama al 112 o a la Línea del Cuidador: 900 100 036.');
+    }
+
+    sendBtn.disabled = false;
+    inputEl.focus();
+  }
+
+  sendBtn.addEventListener('click', () => sendMessage());
+  inputEl.addEventListener('keydown', e => {
+    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
+  });
+
+  // Reabrir badge tras cerrar
+  const obs = new MutationObserver(() => {
+    if (!isOpen) {
+      toggleBtn.innerHTML = '🌿<span class="chat-badge">IA</span>';
+    }
+  });
+  obs.observe(chatWindow, { attributes: true });
+})();
 </script>
 </body>
 </html>
